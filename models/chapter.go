@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"time"
+	"strconv"
 )
 
 type DBChapter struct {
@@ -28,9 +29,9 @@ func InitChapter()(*DBChapter){
 }
 
 
-func (dbw *DBChapter)IsExistChapter(title string)(bool) {
+func (dbw *DBChapter)IsExistChapter(bookID int64,title string)(bool) {
 	dbw.QueryDataPre()
-	err := dbw.Db.QueryRow("select title from chapter where title='"+title+"'").Scan(&dbw.Chapter.Title)
+	err := dbw.Db.QueryRow("select title from chapter where bid="+strconv.FormatInt(bookID,10)+" and title='"+title+"'").Scan(&dbw.Chapter.Title)
 	if err!=nil{
 		return false
 	}

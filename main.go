@@ -1,15 +1,12 @@
 
 package main
 
-import (
-	"fiction/spider"
-)
-
-
+import "fiction/spider"
 
 func main() {
 
 	spider.DDXS()
+
 }
 
 

@@ -6,12 +6,14 @@ import (
 	"fiction/models"
 	"github.com/PuerkitoBio/goquery"
 	"database/sql"
-	"os"
 	"fiction/config"
+	"time"
+	"os"
 )
 
 
 func DDXS(){
+	start := time.Now()
 	fmt.Println("spider is running")
 	//get book list
 	urlDDXS:=config.GetValue("spiderUrl","ddxs")
@@ -48,7 +50,7 @@ func DDXS(){
 						if dom!=nil{
 							chapterNum++
 							title:=common.GbkToUtf8(dom.Find("#wrapper > div.content_read > div > div.bookname > h1").Text())
-							isExist=dbChapter.IsExistChapter(title)
+							isExist=dbChapter.IsExistChapter(insertLastID,title)
 							if isExist{
 								fmt.Println("Exist chapter:"+title)
 							}else{
@@ -81,8 +83,17 @@ func DDXS(){
 		})
 		dbBook.Db.Close()
 		dbChapter.Db.Close()
+		fmt.Println("complete")
 	}
+	cost := time.Since(start)
+	fmt.Printf("time=[%s]",cost)
+	defer os.Exit(0)
+}
 
-	fmt.Println("complete")
-	os.Exit(1)
+func AfreshBook(bookID int64){
+
+}
+
+func AfreshChapter(bookID int64,chapterID int64){
+
 }
