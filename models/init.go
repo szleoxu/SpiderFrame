@@ -3,7 +3,7 @@ package models
 import(
 	_ "github.com/go-sql-driver/mysql"
 	"database/sql"
-	"fiction/config"
+	"SpiderFrame/config"
 	"log"
 	"os"
 )
@@ -19,6 +19,11 @@ func Init() *sql.DB {
 	sqlDB, err := sql.Open("mysql", connectionStr)
 	if err != nil {
 		log.Fatalf("connect mysql is fail.%s", err.Error())
+		os.Exit(1)
+	}
+	errPing:=sqlDB.Ping()
+	if errPing!=nil{
+		log.Fatalf("ping mysql is fail.%s", err.Error())
 		os.Exit(1)
 	}
 	return sqlDB
