@@ -20,3 +20,20 @@ func GetUnixTime(date string) time.Time{
 	tm, _ := time.ParseInLocation(timeLayout, date, loc)
 	return tm
 }
+
+func GetWeekDay() int{
+	t := time.Now()
+	weekNum:=int(t.Weekday())
+	return weekNum
+}
+
+func GetCustomTime(format int,hour int64) string{
+	now:=time.Now().Add(time.Duration(hour) * time.Hour)
+	nowTime :="0"
+	if format==1{
+		nowTime=now.Format("2006-01-02 15:04:05")
+	}else if format==2{
+		nowTime=now.Format("2006-01-02")
+	}
+	return nowTime
+}
