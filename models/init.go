@@ -1,14 +1,15 @@
 package models
 
-import(
-	_ "github.com/go-sql-driver/mysql"
-	"database/sql"
+import (
 	"SpiderFrame/config"
+	"database/sql"
+	"github.com/go-redis/redis/v8"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"os"
 )
 
-func Init() *sql.DB {
+func InitMysql() *sql.DB {
 	cfg := config.GetConfigFile()
 	username, _ := cfg.GetValue("mysql", "username")
 	password, _ := cfg.GetValue("mysql", "password")
@@ -27,6 +28,18 @@ func Init() *sql.DB {
 		os.Exit(1)
 	}
 	return sqlDB
+}
+
+func InitRedis(dbIndex int) *redis.Client {
+	cfg := config.GetConfigFile()
+	ip,_ := cfg.GetValue("redis", "host")
+	pwd,_ := cfg.GetValue("redis", "password")
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     ip,
+		Password: pwd,
+		DB:       dbIndex, // use default DB
+	})
+	return rdb
 }
 
 

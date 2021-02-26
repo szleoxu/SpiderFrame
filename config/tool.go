@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/Unknwon/goconfig"
 	"fmt"
+	"github.com/unknwon/goconfig"
 	"os"
 )
 
@@ -16,8 +16,8 @@ func GetConfigFile() *goconfig.ConfigFile {
 }
 
 
-func GetValue(key string,value string) string {
+func GetValue(section string,key string) string {
 	cfg := GetConfigFile()
-	urlDDXS, _ := cfg.GetValue(key, value)
-	return urlDDXS
+	value, _ := cfg.GetValue(section, key)
+	return value
 }

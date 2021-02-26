@@ -1,18 +1,18 @@
 package common
 
 import (
-	"net/http"
-	"github.com/PuerkitoBio/goquery"
 	"fmt"
-	"os"
+	"github.com/PuerkitoBio/goquery"
 	"log"
+	"net/http"
+	"os"
 )
 
 
 /**
-return document
+	return document
  */
-func UrlResponse(url string) (*goquery.Document){
+func UrlResponse(url string) *goquery.Document{
 	response := GetResponse(url)
 	if response.StatusCode == 403 {
 		fmt.Println("403:Forbidden")
