@@ -15,9 +15,8 @@ func GetConfigFile() *goconfig.ConfigFile {
 	return cfg
 }
 
-
-func GetValue(section string,key string) string {
+func GetValue(section string, key string) (string, error) {
 	cfg := GetConfigFile()
-	value, _ := cfg.GetValue(section, key)
-	return value
+	value, err := cfg.GetValue(section, key)
+	return value, err
 }
