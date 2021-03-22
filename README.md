@@ -1,3 +1,16 @@
+## Introduction to SpiderFrame
+A background service framework developed based on GO.
+
+In fact, this is not a real crawler framework, because it does not integrate any third-party crawler dependency libraries, nor does it rewrite a new crawler library. Users can add the latest and more mature third-party crawler libraries according to their preferences.
+
+This is more like a background data processing framework, after all, the data crawled by the crawler must be stored in the database. Therefore, the framework integrates the public methods needed to process crawler data and database-related modules such as mysql and redis, and examples are attached.
+
+**Recommend several excellent third-party crawler libraries**
+* [PuerkitoBio/goquery](https://github.com/PuerkitoBio/goquery)
+* [gocolly/colly](https://github.com/gocolly/colly)
+* [chromedp/chromedp](https://github.com/chromedp/chromedp)
+
+
 ## SpiderFrame简介
 基于GO开发的后台服务框架。
 
