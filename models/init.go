@@ -10,20 +10,19 @@ import (
 )
 
 func InitMysql() *sql.DB {
-	cfg := config.GetConfigFile()
-	username, _ := cfg.GetValue("mysql", "username")
-	password, _ := cfg.GetValue("mysql", "password")
-	host, _ := cfg.GetValue("mysql", "host")
-	port, _ := cfg.GetValue("mysql", "port")
-	database, _ := cfg.GetValue("mysql", "database")
+	username := config.GetValue("mysql", "username")
+	password := config.GetValue("mysql", "password")
+	host := config.GetValue("mysql", "host")
+	port := config.GetValue("mysql", "port")
+	database := config.GetValue("mysql", "database")
 	connectionStr := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + database
 	sqlDB, err := sql.Open("mysql", connectionStr)
 	if err != nil {
 		log.Fatalf("connect mysql is fail.%s", err.Error())
 		os.Exit(1)
 	}
-	errPing:=sqlDB.Ping()
-	if errPing!=nil{
+	errPing := sqlDB.Ping()
+	if errPing != nil {
 		log.Fatalf("ping mysql is fail.%s", err.Error())
 		os.Exit(1)
 	}
@@ -31,9 +30,8 @@ func InitMysql() *sql.DB {
 }
 
 func InitRedis(dbIndex int) *redis.Client {
-	cfg := config.GetConfigFile()
-	ip,_ := cfg.GetValue("redis", "host")
-	pwd,_ := cfg.GetValue("redis", "password")
+	ip := config.GetValue("redis", "host")
+	pwd := config.GetValue("redis", "password")
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     ip,
 		Password: pwd,
@@ -41,5 +39,3 @@ func InitRedis(dbIndex int) *redis.Client {
 	})
 	return rdb
 }
-
-
